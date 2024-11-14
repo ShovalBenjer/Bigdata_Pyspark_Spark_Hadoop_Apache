@@ -1,0 +1,311 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyP79lrvWBAFXSks97BthC4p",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/ShovalBenjer/Bigdata_Pyspark_Apache/blob/main/Basic_Functions\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "tg5KCzo9LgtS",
+        "outputId": "7c287ada-dab9-40b1-f8bf-9839d1519d29"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Requirement already satisfied: pyspark in /usr/local/lib/python3.10/dist-packages (3.5.3)\n",
+            "Requirement already satisfied: py4j==0.10.9.7 in /usr/local/lib/python3.10/dist-packages (from pyspark) (0.10.9.7)\n"
+          ]
+        }
+      ],
+      "source": [
+        "pip install pyspark"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from pyspark import SparkContext, SparkConf\n",
+        "\n",
+        "# Create a Spark configuration\n",
+        "conf = SparkConf().setAppName(\"MyApp\").setMaster(\"local[*]\")\n",
+        "\n",
+        "# Initialize SparkContext with this configuration\n",
+        "sc = SparkContext(conf=conf)"
+      ],
+      "metadata": {
+        "id": "bHmb4RvLSQhS"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "lines = [21, 27, 43, 40, 75, 61, 70, 8, 9, 100, 11]"
+      ],
+      "metadata": {
+        "id": "kPWRPgfVN92C"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "lines"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "6fkUb9c6R1TI",
+        "outputId": "3b343d0e-c08f-43c6-baa2-21b764ef2ea6"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "[21, 27, 43, 40, 75, 61, 70, 8, 9, 100, 11]"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 4
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "firstRDD = sc.parallelize(lines)\n",
+        "firstRDD"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "WDxZfyvUR6OU",
+        "outputId": "49bdd7a0-6ca6-40c1-8983-199e448908bd"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "ParallelCollectionRDD[0] at readRDDFromFile at PythonRDD.scala:289"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 6
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(firstRDD.take(5))  # Displays the first 5 elements of the RDD\n",
+        "print(firstRDD.collect())  # Collects all elements to the driver and displays them\n",
+        "print(firstRDD.first())  # Displays the first element of the RDD"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "sl7me76YSWbN",
+        "outputId": "af3e9287-d619-4b4c-be86-658b49c1f5df"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "[21, 27, 43, 40, 75]\n",
+            "[21, 27, 43, 40, 75, 61, 70, 8, 9, 100, 11]\n",
+            "21\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "secondRDD = firstRDD.map(lambda x: x + 123)\n",
+        "print(\"Elements of secondRDD:\", secondRDD.collect())"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "c1UVfR6zgT56",
+        "outputId": "b89b3a80-d5c0-4127-ed79-79c173d9beff"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Elements of secondRDD: [144, 150, 166, 163, 198, 184, 193, 131, 132, 223, 134]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Task c: Find max of firstRDD and min of secondRDD\n",
+        "max_firstRDD = firstRDD.max()\n",
+        "min_secondRDD = secondRDD.min()\n",
+        "print(\"Maximum element of firstRDD:\", max_firstRDD)\n",
+        "print(\"Minimum element of secondRDD:\", min_secondRDD)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "-wyUquMTgVX0",
+        "outputId": "3d181925-228e-4282-ac2c-0f322bcda5b0"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Maximum element of firstRDD: 100\n",
+            "Minimum element of secondRDD: 131\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Task d: Create thirdRDD with elements greater than 150\n",
+        "thirdRDD = secondRDD.filter(lambda x: x > 150)\n",
+        "print(\"Elements of thirdRDD:\", thirdRDD.collect())"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "7jdbRjesgcQY",
+        "outputId": "f75c89ce-ca18-4148-db27-c05d93de46ac"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Elements of thirdRDD: [166, 163, 198, 184, 193, 223]\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def f(x):\n",
+        "    return x**2 - 3\n",
+        "a = 0\n",
+        "b = 10\n",
+        "n = 10  # Number of intervals; you can increase this for better accuracy\n",
+        "step = (b - a) / n\n",
+        "# Create an RDD with values from 1 to n-1 (for the summation part)\n",
+        "k_values = sc.parallelize(range(1, n))\n",
+        "# Apply the function to each interval\n",
+        "summation = k_values.map(lambda k: f(a + k * step)).sum()\n",
+        "# Final calculation of the integral\n",
+        "integral_approx = (b - a) / n * (f(a) / 2 + summation + f(b) / 2)\n",
+        "print(\"Approximation of the integral:\", integral_approx)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "qELIyl6pgq2o",
+        "outputId": "478dccf6-b134-4a23-b73c-fc4c85cf975b"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Approximation of the integral: 305.0\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "with open(\"data.txt\", \"w\") as file:\n",
+        "    file.write(\"Hello, this is the first line.\\n\")\n",
+        "    file.write(\"No this is patrick.\\n\")\n",
+        "    file.write(\"And here is the third line. if this works then adir is gay\\n\")\n",
+        "\n",
+        "# Create an RDD from the text file\n",
+        "text_rdd = sc.textFile(\"data.txt\")\n",
+        "\n",
+        "# Display the RDD content\n",
+        "text_rdd.collect()\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "TCkSP62hjzlP",
+        "outputId": "9a8b709d-67b2-43f0-86ec-01fb4e813ef0"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "['Hello, this is the first line.',\n",
+              " 'No this is patrick.',\n",
+              " 'And here is the third line. if this works then adir is gay']"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 23
+        }
+      ]
+    }
+  ]
+}
