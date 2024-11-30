@@ -17,7 +17,8 @@ To run this notebook, ensure you have the following installed:
 ---
 
 ## How to Run the Notebook
-1. Open the notebook in your preferred environment (e.g., Jupyter Notebook, Google Colab, or VLAB).
+1. Open the notebook in your preferred environment (e.g., Jupyter Notebook, Google Colab, or VLAB)
+(prefered to run on google colabs for best compatabillity but should work also on vlab as tested)
 2. Ensure Spark is installed and correctly configured. If using Google Colab, you may need to set up Spark using additional commands (not covered in this notebook).
 3. Run the notebook **from top to bottom** without skipping any cells. The code is structured sequentially, so the outputs depend on prior computations.
 
