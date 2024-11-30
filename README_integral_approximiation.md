@@ -41,3 +41,5 @@ The notebook generates:
 ## Troubleshooting
 - If SparkContext conflicts occur, ensure no other Spark sessions are running.
 - For performance issues, adjust the number of workers or reduce the size of `n` to test with smaller datasets.
+
+---
