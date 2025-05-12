@@ -1,7 +1,7 @@
 Readme.MD
 # Personal Note
 
-Authors: 319037404 Shoval Benjer Adir Amar 209017755 Alon Berkovich 208432625
+Authors: Shoval Benjer Adir Amar  Alon Berkovich 
 
 
 This project commenced with an exploration of advanced NLP techniques, initially drawn to the potential of transformer architectures like modern BERT variants. Early discussions with Dr. Boris Moroz were instrumental in pivoting from less defined clustering ideas towards a focused and achievable classification mission – predicting consumer complaint resolution success.
