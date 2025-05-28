@@ -3,6 +3,7 @@ Readme.MD
 
 Authors: Shoval Benjer Adir Amar  Alon Berkovich 
 
+![Demo](https://github.com/ShovalBenjer/ShovalBenjer/blob/main/plotly_real-time_simulation_demo.gif)
 
 This project commenced with an exploration of advanced NLP techniques, initially drawn to the potential of transformer architectures like modern BERT variants. Early discussions with Dr. Boris Moroz were instrumental in pivoting from less defined clustering ideas towards a focused and achievable classification mission – predicting consumer complaint resolution success.
 
